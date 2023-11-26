@@ -79,12 +79,32 @@ const requiredFields = ['services', 'about', 'name', 'website', 'phone_number', 
 };
 
 
+const get_agency = async (req ,res) => {
+  
+  try{
+   const db = admin.firestore();
+    const agenciesRef = await db.collection('agencies').get();
+  
+   let agencies =[]
+     agenciesRef.forEach((doc) =>{
+      
+     const id = doc.id
+     const data = doc.data()
+     agencies.push({id:id , data:data})
+     
+     })
+     
+     res.status(200).json({data: agencies})
+    
+  }catch(error){
+    res.send({error:error})
+  }
+}
 
 
 
 
 
-
-module.exports = { create_agencies,upload };
+module.exports = { create_agencies,upload, get_agency };
 
 
