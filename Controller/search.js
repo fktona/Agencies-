@@ -1,3 +1,4 @@
+
 const admin = require('firebase-admin');
 
 const get_search = async (req, res) => {
@@ -5,15 +6,9 @@ const get_search = async (req, res) => {
   const searchNormalized = search ? search.trim().toLowerCase().replace(/\s/g, '') : '';
 
   try {
-    if (!searchNormalized) {
-      res.status(400).send({ error: 'Search parameter is required' });
-      return;
-    }
+    
 
-    if (searchNormalized.length < 2) {
-      res.status(400).send({ error: 'Search parameter must be at least 2 characters' });
-      return;
-    }
+    
 
     const db = admin.firestore();
     const agenciesRef = await db.collection('agencies').get();
