@@ -48,10 +48,10 @@ const requiredFields = ['services', 'about', 'name', 'website', 'phone_number', 
         });
 
         stream.on('finish', async () => {
-            // Logo uploaded successfully, now get the download URL
-            const logoDownloadURL = `https://storage.googleapis.com/${bucket.name}/${logoFileUpload.name}`;
+            
+const [logoDownloadURL] = await logoFileUpload.getSignedUrl({ action: 'read', expires: '01-01-2100' });
 
-            // Create agency data
+            
             const data = {
                 name,
                 services,
