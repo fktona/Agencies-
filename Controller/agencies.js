@@ -14,7 +14,7 @@ const create_agencies = async (req, res) => {
   const bucket = storage.bucket();
   
     try {
-        const { services, about, name, website, phone_number, location, address } = req.body;
+        const { services, about, name, website, phone_number, location, address , featured} = req.body;
 const requiredFields = ['services', 'about', 'name', 'website', 'phone_number', 'location', 'address'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
 
@@ -60,6 +60,7 @@ const requiredFields = ['services', 'about', 'name', 'website', 'phone_number', 
                 phone_number,
                 location,
                 address,
+              featured: featured || null, 
                 logoURL: logoDownloadURL, // Add the logo URL to the data
             };
 
