@@ -38,7 +38,7 @@ const get_search = async (req, res) => {
       const agencyDoc = await db.collection('agencies').doc(agencyId).get();
 
       if (agencyDoc.exists) {
-        searchResults.push({ agencyId:id , ...agencyDoc.data()});;
+        searchResults.push({ id: agencyId , ...agencyDoc.data()});;
       } else {
         res.status(400).send({ error: 'Agency does not exist' });
         return;
