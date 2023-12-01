@@ -101,11 +101,41 @@ const get_agency = async (req ,res) => {
     res.send({error:error})
   }
 }
+const getAgencyById = async (req, res) => {
+  try {
+    const {id:agencyId} = req.params ;
+
+    if (!agencyId) {
+      
+      return res.status(400).json({ error: 'Agency ID is required.' });
+    }
+
+    
+    const db = admin.firestore();
+
+    
+    const agencyRef = await db.collection('agencies').doc(agencyId).get();
+
+    if (!agencyRef.exists) {
+      
+      return res.status(404).json({ error: 'Agency not found.' });
+    }
+
+ 
+    const agencyData = agencyRef.data();
+
+  
+    res.status(200).json({ data: agencyData });
+  } catch (error) {
+  
+    res.status(500).json({ error: error.message });
+  }
+};
 
 
 
 
+module.exports = { create_agencies,upload, get_agency, getAgencyById };
 
-module.exports = { create_agencies,upload, get_agency };
 
 
