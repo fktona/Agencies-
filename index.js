@@ -12,7 +12,7 @@ app.use(cors());
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'gs://findanagency-c0cbe.appspot.com',
+  storageBucket: 'gs://find-agencies.appspot.com',
 });
 
 
