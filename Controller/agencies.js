@@ -132,10 +132,47 @@ const getAgencyById = async (req, res) => {
   }
 };
 
+  const approveAgency = async (req, res) => {
+  try {
+    const { agencyId } = req.params;
+
+    if (!agencyId) {
+      return res.status(400).json({ error: 'Agency ID is required' });
+    }
+
+    const db = admin.firestore();
+    const agencyDocRef = db.collection('agencies').doc(agencyId);
+
+    const agencySnapshot = await agencyDocRef.get();
+
+    if (!agencySnapshot.exists) {
+      return res.status(404).json({ error: 'Agency not found' });
+    }
+
+    
+    await agencyDocRef.update({ status: 'approved' });
+
+    const updatedAgencySnapshot = await agencyDocRef.get();
+    const updatedAgencyData = updatedAgencySnapshot.data();
+
+    res.status(200).json({
+      message: 'Agency status updated to approved',
+      data: updatedAgencyData,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: 'An error occurred while updating agency status',
+      details: error.message,
+    });
+  }
+};
 
 
 
-module.exports = { create_agencies,upload, get_agency, getAgencyById };
+
+
+module.exports = { create_agencies,upload, get_agency, getAgencyById, approveAgency };
 
 
 
