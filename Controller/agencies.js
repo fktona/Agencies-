@@ -21,13 +21,13 @@ const requiredFields = ['services', 'about', 'name', 'website', 'phone_number', 
         if (missingFields.length > 0) {
             return res.status(400).json({ error: 'Missing required fields', missingFields });
         }
-        // Input validation
+      
         if (!services || !about || !name || !website || !phone_number || !location || !address) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // Upload logo to Firebase Storage
-        const logoFile = req.file; // Assuming you are using a middleware like Multer for file uploads
+      
+        const logoFile = req.file; 
 
         if (!logoFile) {
             return res.status(400).json({ error: 'Logo file is required' });
@@ -60,18 +60,18 @@ const [logoDownloadURL] = await logoFileUpload.getSignedUrl({ action: 'read', ex
                 phone_number,
                 location,
                 address,
-              featured: featured || null, 
-                logoURL: logoDownloadURL, // Add the logo URL to the data
+                status: pending, 
+                logoURL: logoDownloadURL,
             };
 
-            // Add data to Firestore
+            
             const db = admin.firestore();
             const agencyDocRef = await db.collection("agencies").add(data);
 
             res.status(201).json({ message: 'Request sent successfully', data: data });
         });
 
-        // Pipe the logo file stream to Firebase Storage
+        
         stream.end(logoFile.buffer);
     } catch (error) { 
         console.error(error);
