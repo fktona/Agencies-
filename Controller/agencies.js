@@ -94,6 +94,7 @@ const get_agency = async (req ,res) => {
      agencies.push({id:id , data:data})
      
      })
+    await db.collection("approvedAgency").add(agencies)
      
      res.status(200).json({data: agencies})
     
@@ -155,7 +156,7 @@ const getAgencyById = async (req, res) => {
 
     const updatedAgencySnapshot = await agencyDocRef.get();
     const updatedAgencyData = updatedAgencySnapshot.data();
-    await db.collection.("approvedAgency").add(updatedAgencyData)
+    await db.collection("approvedAgency").add(updatedAgencyData)
 
     res.status(200).json({
       message: 'Agency status updated to approved',
