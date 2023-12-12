@@ -60,7 +60,7 @@ const [logoDownloadURL] = await logoFileUpload.getSignedUrl({ action: 'read', ex
                 phone_number,
                 location,
                 address,
-                status: pending, 
+                status: "pending", 
                 logoURL: logoDownloadURL,
             };
 
