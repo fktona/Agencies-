@@ -92,9 +92,10 @@ const get_agency = async (req ,res) => {
      const id = doc.id
      const data = doc.data()
      agencies.push({id:id , data:data})
+       await db.collection("approvedAgency").add(agencies)
      
      })
-    await db.collection("approvedAgency").add(agencies)
+    
      
      res.status(200).json({data: agencies})
     
