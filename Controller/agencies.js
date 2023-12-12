@@ -87,12 +87,11 @@ const get_agency = async (req ,res) => {
     const agenciesRef = await db.collection('agencies').get();
   
    let agencies =[]
-     agenciesRef.forEach(async (doc) =>{
+     agenciesRef.forEach((doc) =>{
       
      const id = doc.id
      const data = doc.data()
      agencies.push({id:id , data:data})
-       await db.collection("approvedAgency").doc(id).set(data)
      
      })
     
