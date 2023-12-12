@@ -170,6 +170,34 @@ const getAgencyById = async (req, res) => {
   }
 };
 
+const getApprovedAgencies = async (req, res) => {
+  try {
+    const db = admin.firestore();
+    const approvedAgenciesSnapshot = await db.collection('approvedAgency').get();
+
+    if (approvedAgenciesSnapshot.empty) {
+      return res.status(404).json({ error: 'No approved agencies found' });
+    }
+
+    const approvedAgencies = [];
+    approvedAgenciesSnapshot.forEach((doc) => {
+      approvedAgencies.push(doc.data());
+    });
+
+    res.status(200).json({
+      message: 'Approved agencies retrieved successfully',
+      data: approvedAgencies,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: 'An error occurred while retrieving approved agencies',
+      details: error.message,
+    });
+  }
+};
+
+
 
 
 
