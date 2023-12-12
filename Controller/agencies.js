@@ -202,7 +202,7 @@ const getApprovedAgencies = async (req, res) => {
 
 
 
-module.exports = { create_agencies,upload, get_agency, getAgencyById, approveAgency };
+module.exports = { create_agencies,upload, get_agency, getAgencyById, approveAgency,getApprovedAgencies };
 
 
 
