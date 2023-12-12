@@ -101,6 +101,7 @@ const get_agency = async (req ,res) => {
     res.send({error:error})
   }
 }
+
 const getAgencyById = async (req, res) => {
   try {
     const {id:agencyId} = req.params ;
@@ -154,6 +155,7 @@ const getAgencyById = async (req, res) => {
 
     const updatedAgencySnapshot = await agencyDocRef.get();
     const updatedAgencyData = updatedAgencySnapshot.data();
+    await db.collection.("approvedAgency").add(updatedAgencyData)
 
     res.status(200).json({
       message: 'Agency status updated to approved',
