@@ -87,7 +87,7 @@ const get_agency = async (req ,res) => {
     const agenciesRef = await db.collection('agencies').get();
   
    let agencies =[]
-     agenciesRef.forEach((doc) =>{
+     agenciesRef.forEach(async (doc) =>{
       
      const id = doc.id
      const data = doc.data()
