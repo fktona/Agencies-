@@ -8,7 +8,7 @@ const {create_agencies , upload ,get_agency, getAgencyById ,approveAgency,getApp
 router.post('/create' , upload.single('logo'), create_agencies)
 router.get('/agency/:id', getAgencyById)
 router.get('/agency/approve', getApprovedAgencies)
-router.post('/agency/approve/:agencyId', approveAgency)
+router.patch('/agency/approve/:agencyId', approveAgency)
 router.get('/search' , get_search)
 router.get('/agency' ,  get_agency)
 router.get('/search/location' ,  get_agencies_by_location )
