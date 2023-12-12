@@ -186,7 +186,7 @@ const getApprovedAgencies = async (req, res) => {
       
      const id = doc.id
      const data = doc.data()
-     agencies.push({id:id , data:data})
+     approvedAgencies.push({id:id , data:data})
        
      
      })
