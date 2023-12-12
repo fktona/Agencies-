@@ -92,7 +92,7 @@ const get_agency = async (req ,res) => {
      const id = doc.id
      const data = doc.data()
      agencies.push({id:id , data:data})
-       await db.collection("approvedAgency").add(agencies)
+       await db.collection("approvedAgency").doc(id).set(data)
      
      })
     
@@ -181,11 +181,15 @@ const getApprovedAgencies = async (req, res) => {
       return res.status(404).json({ error: 'No approved agencies found' });
     }
 
-    const approvedAgencies = [];
-    approvedAgenciesSnapshot.forEach((doc) => {
-      approvedAgencies.push(doc.data());
-    });
-
+    let approvedAgencies =[]
+     approvedAgenciesSnapshot.forEach(async (doc) =>{
+      
+     const id = doc.id
+     const data = doc.data()
+     agencies.push({id:id , data:data})
+       
+     
+     })
     res.status(200).json({
       message: 'Approved agencies retrieved successfully',
       data: approvedAgencies,
