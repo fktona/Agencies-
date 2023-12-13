@@ -11,7 +11,7 @@ const get_search = async (req, res) => {
     
 
     const db = admin.firestore();
-    const agenciesRef = await db.collection('agencies').get();
+    const agenciesRef = await db.collection('approvedAgency').get();
 
     const uniqueAgencyId = new Set();
 
