@@ -32,7 +32,7 @@ const get_agencies_by_location = async (req, res) => {
     }
 };
    const get_location = async (req, res) => {
-    try{ const location = ['Kano' ,'Lagos Mainland', 'Lagos Island', 'Abuja']
+    try{ const location = ['Kano' ,'Lagos Mainland', 'Lagos Island', 'Ibadan', 'Abuja']
      res.status(200).json({message: 'Location retrieved successfully' , data: location})
  } catch(err){
      res.status(400).json({message: 'can not retrieve location list' , error: err.message})
