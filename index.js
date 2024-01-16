@@ -12,7 +12,7 @@ app.use(cors());
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'gs://project-cla-903f4.appspot.com',
+  storageBucket: 'gs://find-agencies.appspot.com',
 });
 
 
